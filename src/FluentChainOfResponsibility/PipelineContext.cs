@@ -36,7 +36,7 @@ namespace FluentChainOfResponsibility
         }
 
         /// <inheritdoc />
-        public async Task<TResponse?> Next(TRequest request, CancellationToken cancellationToken)
+        public async Task<TResponse> Next(TRequest request, CancellationToken cancellationToken)
         {
             try
             {

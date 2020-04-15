@@ -42,6 +42,6 @@ namespace FluentChainOfResponsibility
         /// <param name="request">The request</param>
         /// <param name="cancellationToken">The cancellation token</param>
         /// <returns>Request response</returns>
-        Task<TResponse?> Next(TRequest request, CancellationToken cancellationToken);
+        Task<TResponse> Next(TRequest request, CancellationToken cancellationToken);
     }
 }
