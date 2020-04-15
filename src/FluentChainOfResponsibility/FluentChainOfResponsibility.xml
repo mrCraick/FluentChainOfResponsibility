@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FluentChainOfResponsibility</name>
+    </assembly>
+    <members>
+        <member name="T:FluentChainOfResponsibility.IExceptionHandle`2">
+            <summary>
+            Defines a handler for an exception
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IExceptionHandle`2.Handle(System.Exception,FluentChainOfResponsibility.IPipelineContext{`0,`1},System.Threading.CancellationToken)">
+            <summary> 
+            Handles an exception
+            </summary>
+            <param name="exception">The exception</param>
+            <param name="pipelineContext">The current context</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.ExceptionHandle`2">
+            <summary>
+            Default <see cref="T:FluentChainOfResponsibility.IExceptionHandle`2"/> implementation
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="M:FluentChainOfResponsibility.ExceptionHandle`2.Handle(System.Exception,FluentChainOfResponsibility.IPipelineContext{`0,`1},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentChainOfResponsibility.IMediator">
+            <summary>
+            Defines a mediator to encapsulate request/response interaction patterns
+            </summary>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IMediator.Send``2(``0,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously send a request to a pipeline
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+            <param name="request">The request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.InstanceFactory">
+            <summary>
+            Factory method used to resolve an instance
+            </summary>
+            <param name="instanceType">Type of instance to resolve</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.InstanceFactoryExtensions">
+            <summary>
+            <see cref="T:FluentChainOfResponsibility.InstanceFactory"/> extension
+            </summary>
+        </member>
+        <member name="M:FluentChainOfResponsibility.InstanceFactoryExtensions.GetInstance``1(FluentChainOfResponsibility.InstanceFactory)">
+            <summary>
+            Get an instance
+            </summary>
+            <typeparam name="T">Type of instance to resolve</typeparam>
+            <param name="factory">Factory method</param>
+            <returns>An instance</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.InstanceFactoryExtensions.GetOptionInstance``1(FluentChainOfResponsibility.InstanceFactory)">
+            <summary>
+            Get an instance or null if it cannot resolve it
+            </summary>
+            <typeparam name="T">Type of instance to resolve</typeparam>
+            <param name="factory">Factory method</param>
+            <returns>An instance or null</returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IPipelineContext`2">
+            <summary>
+            Defines a pipeline context for a request handlers
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="P:FluentChainOfResponsibility.IPipelineContext`2.IsFaulted">
+            <summary>
+            Whether an exception was thrown at time handled
+            </summary>
+        </member>
+        <member name="P:FluentChainOfResponsibility.IPipelineContext`2.Exception">
+            <summary>
+            Instance of <see cref="T:System.Exception"/> 
+            </summary>
+        </member>
+        <member name="P:FluentChainOfResponsibility.IPipelineContext`2.Response">
+            <summary>
+            Request response
+            </summary>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineContext`2.Execute(`0,System.Threading.CancellationToken)">
+            <summary>
+            Execute request processing
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineContext`2.Next(`0,System.Threading.CancellationToken)">
+            <summary>
+            Call a next pipeline to handled a request
+            </summary>
+            <param name="request">The request</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns>Request response</returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IPipelineContextFactory">
+            <summary>
+            Defines a <see cref="T:FluentChainOfResponsibility.IPipelineContext`2"/> factory
+            </summary>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineContextFactory.CreatePipelineContext``2">
+            <summary>
+            Create an instance <see cref="T:FluentChainOfResponsibility.IPipelineContext`2"/>
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+            <returns>An instance <see cref="T:FluentChainOfResponsibility.IPipelineContext`2"></see></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IPipelineProfile`2">
+            <summary>
+            Defines a pipeline profile
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="P:FluentChainOfResponsibility.IPipelineProfile`2.RequestPipelineHandlers">
+            <summary>
+            Get a collection of request handlers
+            </summary>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddNext(FluentChainOfResponsibility.IRequestPipelineHandler{`0,`1})">
+            <summary>
+            Add a new next pipeline
+            </summary>
+            <param name="pipeline">Instance of the new handler</param>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddNext``1">
+            <summary>
+            Add a new next pipeline
+            </summary>
+            <typeparam name="TRequestPipelineHandler">The type of new handler</typeparam>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddOptionNext(FluentChainOfResponsibility.IRequestPipelineHandler{`0,`1})">
+            <summary>
+            Add a new next pipeline or ignore if it is null
+            </summary>
+            <param name="pipeline">Instance of the new handler or null</param>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddOptionNext``1">
+            <summary>
+            Add a new next pipeline or ignore if can't resolve
+            </summary>
+            <typeparam name="TRequestPipelineHandler">The type of new handler</typeparam>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.SetExceptionHandler(FluentChainOfResponsibility.IExceptionHandle{`0,`1})">
+            <summary>
+            Set a custom exception handler
+            </summary>
+            <param name="exceptionHandle">Instance of the exception handle</param>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.SetExceptionHandler``1">
+            <summary>
+            Set a custom exception handler
+            </summary>
+            <typeparam name="TExceptionHandle">The type of exception handle</typeparam>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
+            <summary>
+            Add a new other pipeline profile
+            </summary>
+            <param name="pipelineProfile">Instance of the new pipeline profile</param>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddPipelineProfile``1">
+            <summary>
+            Add a new other pipeline profile
+            </summary>
+            <typeparam name="TPipelineProfile">The type of pipeline profile</typeparam>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddOptionPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
+            <summary>
+            Add a new other pipeline profile or ignore if it is null
+            </summary>
+            <param name="pipelineProfile">Instance of the new pipeline profile</param>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddOptionPipelineProfile``1">
+            <summary>
+            Add a new other pipeline profile or ignore if can't resolve
+            </summary>
+            <typeparam name="TPipelineProfile">The type of pipeline profile</typeparam>
+            <returns>Pipeline profile</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.BuildPipelines">
+            <summary>
+            Build a pipelines
+            </summary>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IPipelines`2">
+            <summary>
+            Defines a pipelines
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelines`2.GetNextPipelineHandler">
+            <summary>
+            Get a next pipeline handler
+            </summary>
+            <returns>Next pipeline handler</returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelines`2.HandleException(System.Exception,FluentChainOfResponsibility.IPipelineContext{`0,`1},System.Threading.CancellationToken)">
+            <summary>
+            Handle an exception
+            </summary>
+            <param name="exception">The exception</param>
+            <param name="pipelineContext">The pipeline context</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IPipelinesFactory`2">
+            <summary>
+            Defines a <see cref="T:FluentChainOfResponsibility.IPipelines`2"/> factory
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelinesFactory`2.Create(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
+            <summary>
+            Create an instance of <see cref="T:FluentChainOfResponsibility.IPipelineProfile`2"/>
+            </summary>
+            <param name="pipelineProfile">The pipeline profile</param>
+            <returns>An instance of <see cref="T:FluentChainOfResponsibility.IPipelineProfile`2"></see></returns>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IPipelinesFactory`2.Create(System.Collections.Generic.IEnumerable{FluentChainOfResponsibility.IRequestPipelineHandler{`0,`1}},FluentChainOfResponsibility.IExceptionHandle{`0,`1})">
+            <summary>
+            Create an instance of <see cref="T:FluentChainOfResponsibility.IPipelineProfile`2"/>
+            </summary>
+            <param name="handlers">Collection of handlers</param>
+            <param name="exceptionHandle">The exception handle</param>
+            <returns>An instance of <see cref="T:FluentChainOfResponsibility.IPipelineProfile`2"></see></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IRequest`1">
+            <summary>
+            Defines a request
+            </summary>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="T:FluentChainOfResponsibility.IRequestPipelineHandler`2">
+            <summary>
+            Defines a request pipeline handler
+            </summary>
+            <typeparam name="TRequest">The type of request being handled</typeparam>
+            <typeparam name="TResponse">The type of response from the handler</typeparam>
+        </member>
+        <member name="M:FluentChainOfResponsibility.IRequestPipelineHandler`2.HandleAsync(`0,FluentChainOfResponsibility.IPipelineContext{`0,`1},System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously handle a request
+            </summary>
+            <param name="request">Request</param>
+            <param name="pipelineContext">Pipeline context</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:FluentChainOfResponsibility.Mediator">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.Mediator.#ctor(FluentChainOfResponsibility.IPipelineContextFactory)">
+            <summary>
+            Create an instance of <see cref="T:FluentChainOfResponsibility.Mediator"/>
+            </summary>
+            <param name="contextFactory">Context factory</param>
+        </member>
+        <member name="M:FluentChainOfResponsibility.Mediator.Send``2(``0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentChainOfResponsibility.PipelineContext`2">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineContext`2.#ctor(FluentChainOfResponsibility.IPipelines{`0,`1})">
+            <summary>
+            Create an instance of <see cref="T:FluentChainOfResponsibility.PipelineContext`2"/>
+            </summary>
+            <param name="pipelines">Pipelines</param>
+        </member>
+        <member name="P:FluentChainOfResponsibility.PipelineContext`2.IsFaulted">
+            <inheritdoc />
+        </member>
+        <member name="P:FluentChainOfResponsibility.PipelineContext`2.Exception">
+            <inheritdoc />
+        </member>
+        <member name="P:FluentChainOfResponsibility.PipelineContext`2.Response">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineContext`2.Execute(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineContext`2.Next(`0,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentChainOfResponsibility.PipelineContextFactory">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineContextFactory.CreatePipelineContext``2">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentChainOfResponsibility.PipelineProfile`2">
+            <inheritdoc />
+        </member>
+        <member name="P:FluentChainOfResponsibility.PipelineProfile`2.RequestPipelineHandlers">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddNext(FluentChainOfResponsibility.IRequestPipelineHandler{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddNext``1">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddOptionNext(FluentChainOfResponsibility.IRequestPipelineHandler{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddOptionNext``1">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.SetExceptionHandler(FluentChainOfResponsibility.IExceptionHandle{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.SetExceptionHandler``1">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddPipelineProfile``1">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.BuildPipelines">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddOptionPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddOptionPipelineProfile``1">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentChainOfResponsibility.Pipelines`2">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.Pipelines`2.GetNextPipelineHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.Pipelines`2.HandleException(System.Exception,FluentChainOfResponsibility.IPipelineContext{`0,`1},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:FluentChainOfResponsibility.PipelinesFactory`2">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelinesFactory`2.Create(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
+            <inheritdoc />
+        </member>
+        <member name="M:FluentChainOfResponsibility.PipelinesFactory`2.Create(System.Collections.Generic.IEnumerable{FluentChainOfResponsibility.IRequestPipelineHandler{`0,`1}},FluentChainOfResponsibility.IExceptionHandle{`0,`1})">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
