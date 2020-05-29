@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
-using Microsoft.Extensions.Logging;
 
 namespace FluentChainOfResponsibility.Samples.Autofac
 {

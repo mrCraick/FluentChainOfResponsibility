@@ -75,33 +75,6 @@ namespace FluentChainOfResponsibility
         }
 
         /// <inheritdoc />
-        public IPipelineProfile<TRequest, TResponse> AddPipelineProfile(
-            IPipelineProfile<TRequest, TResponse> pipelineProfile)
-        {
-            if (pipelineProfile == null) throw new ArgumentNullException(nameof(pipelineProfile));
-            return AddPipelineProfileInner(pipelineProfile);
-        }
-
-        /// <inheritdoc />
-        public IPipelineProfile<TRequest, TResponse> AddPipelineProfile<TPipelineProfile>()
-            where TPipelineProfile : class, IPipelineProfile<TRequest, TResponse>
-        {
-            var pipelineProfileType = typeof(TPipelineProfile);
-            var thisType = GetType();
-
-            if (thisType == pipelineProfileType ||
-                thisType.IsAssignableFrom(pipelineProfileType) ||
-                pipelineProfileType.IsAssignableFrom(thisType))
-            {
-                throw new InvalidOperationException("Recursive dependency profiles.");
-            }
-
-            var profile = _instanceFactory.GetInstance<TPipelineProfile>();
-
-            return AddPipelineProfileInner(profile);
-        }
-
-        /// <inheritdoc />
         public IPipelines<TRequest, TResponse> BuildPipelines()
         {
             var handlers = _queue

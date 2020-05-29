@@ -65,22 +65,6 @@ namespace FluentChainOfResponsibility
             where TExceptionHandle : IExceptionHandle<TRequest, TResponse>;
 
         /// <summary>
-        /// Add a new other pipeline profile
-        /// </summary>
-        /// <param name="pipelineProfile">Instance of the new pipeline profile</param>
-        /// <returns>Pipeline profile</returns>
-        IPipelineProfile<TRequest, TResponse> AddPipelineProfile(
-            IPipelineProfile<TRequest, TResponse> pipelineProfile);
-
-        /// <summary>
-        /// Add a new other pipeline profile
-        /// </summary>
-        /// <typeparam name="TPipelineProfile">The type of pipeline profile</typeparam>
-        /// <returns>Pipeline profile</returns>
-        IPipelineProfile<TRequest, TResponse> AddPipelineProfile<TPipelineProfile>()
-            where TPipelineProfile : class, IPipelineProfile<TRequest, TResponse>;
-
-        /// <summary>
         /// Add a new other pipeline profile or ignore if it is null
         /// </summary>
         /// <param name="pipelineProfile">Instance of the new pipeline profile</param>
