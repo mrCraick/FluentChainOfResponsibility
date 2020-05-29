@@ -178,20 +178,6 @@
             <typeparam name="TExceptionHandle">The type of exception handle</typeparam>
             <returns>Pipeline profile</returns>
         </member>
-        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
-            <summary>
-            Add a new other pipeline profile
-            </summary>
-            <param name="pipelineProfile">Instance of the new pipeline profile</param>
-            <returns>Pipeline profile</returns>
-        </member>
-        <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddPipelineProfile``1">
-            <summary>
-            Add a new other pipeline profile
-            </summary>
-            <typeparam name="TPipelineProfile">The type of pipeline profile</typeparam>
-            <returns>Pipeline profile</returns>
-        </member>
         <member name="M:FluentChainOfResponsibility.IPipelineProfile`2.AddOptionPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
             <summary>
             Add a new other pipeline profile or ignore if it is null
@@ -341,12 +327,6 @@
             <inheritdoc />
         </member>
         <member name="M:FluentChainOfResponsibility.PipelineProfile`2.SetExceptionHandler``1">
-            <inheritdoc />
-        </member>
-        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddPipelineProfile(FluentChainOfResponsibility.IPipelineProfile{`0,`1})">
-            <inheritdoc />
-        </member>
-        <member name="M:FluentChainOfResponsibility.PipelineProfile`2.AddPipelineProfile``1">
             <inheritdoc />
         </member>
         <member name="M:FluentChainOfResponsibility.PipelineProfile`2.BuildPipelines">
