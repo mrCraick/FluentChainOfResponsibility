@@ -6,6 +6,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\dev\owned\FluentChainOfResponsibility\src\FluentChainOfResponsibility\FluentChainOfResponsibility.xml</DocumentationFile>
+    <DocumentationFile>$(ProjectDir)FluentChainOfResponsibility.xml</DocumentationFile>
   </PropertyGroup>
 </Project>
